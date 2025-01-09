@@ -18,7 +18,7 @@ func main() {
 		fmt.Println("Error accepting connection: ", err.Error())
 		os.Exit(1)
 	}
-	var message []byte = []byte("4")
+	message := []byte{0, 7}
 	conn.Write(message)
 
 }
