@@ -1,6 +1,8 @@
 package main
 
-import "encoding/binary"
+import (
+	"github.com/codecrafters-io/kafka-starter-go/app/utils"
+)
 
 type (
 	KafkaResponse struct {
@@ -9,9 +11,7 @@ type (
 )
 
 func (kr *KafkaResponse) Bytes() []byte {
-	bytes := make([]byte, 4)
-	binary.BigEndian.PutUint32(bytes, uint32(kr.CorrelationID))
-	return bytes
+	return utils.GetByteArrayFromInt32(kr.CorrelationID)
 }
 
 func NewKafkaResponse(request *KafkaRequest) KafkaResponse {

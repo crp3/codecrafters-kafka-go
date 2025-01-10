@@ -1,6 +1,8 @@
 package main
 
-import "math/big"
+import (
+	"github.com/codecrafters-io/kafka-starter-go/app/utils"
+)
 
 type (
 	KafkaRequest struct {
@@ -12,8 +14,8 @@ type (
 
 func NewKafkaRequest(bytes []byte) KafkaRequest {
 	return KafkaRequest{
-		APIKey:        int16(big.NewInt(0).SetBytes(bytes[4:6]).Uint64()),
-		APIVersion:    int16(big.NewInt(0).SetBytes(bytes[6:8]).Uint64()),
-		CorrelationID: int32(big.NewInt(0).SetBytes(bytes[8:12]).Uint64()),
+		APIKey:        utils.ParseInt16FromByteArray(bytes[4:6]),
+		APIVersion:    utils.ParseInt16FromByteArray(bytes[6:8]),
+		CorrelationID: utils.ParseInt32FromByteArray(bytes[8:12]),
 	}
 }

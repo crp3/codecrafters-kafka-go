@@ -37,7 +37,6 @@ func (ks *KafkaServer) process(req *KafkaRequest) KafkaResponse {
 
 func (ks *KafkaServer) writeResponse(conn net.Conn, response KafkaResponse) {
 	messageSize := []byte{0, 0, 0, 0} // anything
-	fmt.Println(response.CorrelationID)
 	conn.Write(messageSize)
 	conn.Write(response.Bytes())
 }
