@@ -22,3 +22,9 @@ func GetByteArrayFromInt32(i int32) []byte {
 	binary.BigEndian.PutUint32(bytes, uint32(i))
 	return bytes
 }
+
+func GetByteArrayFromInt16(i int16) []byte {
+	bytes := make([]byte, 2)
+	binary.BigEndian.PutUint16(bytes, uint16(i))
+	return bytes
+}

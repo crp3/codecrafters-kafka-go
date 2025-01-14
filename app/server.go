@@ -32,7 +32,10 @@ func (ks *KafkaServer) Listen() {
 }
 
 func (ks *KafkaServer) process(req *KafkaRequest) KafkaResponse {
-	return NewKafkaResponse(req)
+	if !req.Supported() {
+		return NewKafkaResponse(req, 35)
+	}
+	return NewKafkaResponse(req, 0)
 }
 
 func (ks *KafkaServer) writeResponse(conn net.Conn, response KafkaResponse) {

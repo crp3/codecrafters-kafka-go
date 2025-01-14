@@ -19,3 +19,7 @@ func NewKafkaRequest(bytes []byte) KafkaRequest {
 		CorrelationID: utils.ParseInt32FromByteArray(bytes[8:12]),
 	}
 }
+
+func (kr *KafkaRequest) Supported() bool {
+	return kr.APIVersion >= 0 && kr.APIVersion <= 4
+}
