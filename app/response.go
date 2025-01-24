@@ -41,7 +41,7 @@ func (v *Version) bytes() ([]byte, int) {
 }
 
 func (kr *KafkaResponse) Bytes() []byte {
-	correlationIDBytes := utils.GetByteArrayFromInt32BigEndian(kr.CorrelationID)
+	correlationIDBytes := utils.GetByteArrayFromInt32(kr.CorrelationID)
 	errorCodeBytes := utils.GetByteArrayFromInt16BigEndian(kr.ErrorCode)
 	versionsLengthBytes := byte(len(kr.Versions) + 1)
 	bytes := make([]byte, 0)
@@ -56,11 +56,11 @@ func (kr *KafkaResponse) Bytes() []byte {
 		bytes = append(bytes, vBytes...)
 		messageLength += vSize
 	}
-	throttleTimeBytes := utils.GetByteArrayFromInt32BigEndian(kr.ThrottleTime)
+	throttleTimeBytes := utils.GetByteArrayFromInt32(kr.ThrottleTime)
 	bytes = append(bytes, throttleTimeBytes...)
 	bytes = append(bytes, 0) // tag buffer
 	messageLength += len(throttleTimeBytes) + 1
-	messageLengthBytes := utils.GetByteArrayFromInt32BigEndian(int32(messageLength))
+	messageLengthBytes := utils.GetByteArrayFromInt32(int32(messageLength))
 
 	bytes = append(messageLengthBytes, bytes...)
 

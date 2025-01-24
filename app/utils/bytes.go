@@ -17,15 +17,9 @@ func parseUInt64FromByteArray(bytes []byte) uint64 {
 	return big.NewInt(0).SetBytes(bytes).Uint64()
 }
 
-func GetByteArrayFromInt32BigEndian(i int32) []byte {
+func GetByteArrayFromInt32(i int32) []byte {
 	bytes := make([]byte, 4)
 	binary.BigEndian.PutUint32(bytes, uint32(i))
-	return bytes
-}
-
-func GetByteArrayFromInt32LittleEndian(i int32) []byte {
-	bytes := make([]byte, 4)
-	binary.LittleEndian.PutUint32(bytes, uint32(i))
 	return bytes
 }
 
